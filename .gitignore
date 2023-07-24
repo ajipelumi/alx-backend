@@ -1,0 +1,5 @@
+# Ignore all pycache directories and files
+__pycache__
+
+# Ignore all main.py files in subdirectories
+*main.py
