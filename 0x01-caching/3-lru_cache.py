@@ -16,9 +16,12 @@ class LRUCache(BaseCaching):
         """ Add key/value pair to cache_data. """
         if key and item:
             self.cache_data[key] = item
+            # Update the lru_cache with the most recent key
             self.lru_cache[key] = datetime.now()
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            # Get the key with the lowest datetime
             lru_key = min(self.lru_cache, key=lambda k: self.lru_cache[k])
+            # Delete the key with the lowest datetime from both dicts
             del self.lru_cache[lru_key]
             del self.cache_data[lru_key]
             print("DISCARD: {}".format(lru_key))
