@@ -15,9 +15,13 @@ class LIFOCache(BaseCaching):
         """ Add key/value pair to cache_data. """
         if key and item:
             self.cache_data[key] = item
+            # Update the last_updated_keys with the most recent key
             self.last_updated_keys.append(key)
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            # Get the 2nd most recent key because the most recent key is the
+            # one that was just added
             last_updated_key = self.last_updated_keys[-2]
+            # Delete the 2nd most recent key from cache_data
             del self.cache_data[last_updated_key]
             print("DISCARD: {}".format(last_updated_key))
 
