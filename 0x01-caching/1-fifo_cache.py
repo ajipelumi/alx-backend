@@ -14,8 +14,11 @@ class FIFOCache(BaseCaching):
         if key and item:
             self.cache_data[key] = item
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            # Get all keys in cache_data
             all_keys = self.cache_data.keys()
+            # Get the first key in cache_data (FIFO)
             first_key = list(all_keys)[0]
+            # Delete the first key from cache_data
             del self.cache_data[first_key]
             print("DISCARD: {}".format(first_key))
 
