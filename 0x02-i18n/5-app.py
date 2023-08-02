@@ -46,9 +46,9 @@ def get_user(login_as: int) -> Dict:
 @app.before_request
 def before_request() -> None:
     """ Before request handler. """
-    login = request.args.get('login_as')
-    user = get_user(int(login))
-    if user:
+    login = request.args.get('login_as', None)
+    if login:
+        user = get_user(int(login))
         g.user = user
     else:
         g.user = None
